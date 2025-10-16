@@ -31,7 +31,7 @@ jobs:
     - name: Build application
       run: | 
         echo "Baue Anwendung..."
-        zipn -r build.zip . > /dev/null
+        zip -r build.zip . > /dev/null
 
 
     - name: Deploy (Simulation)
