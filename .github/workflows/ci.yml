@@ -1,0 +1,40 @@
+name: CI/CD Pipeline Demo
+
+on: 
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+build-test-deploy:
+  runs-on: ubuntu-latest
+
+  steps:
+
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Setup Python
+      uses: actions/setup-pythond@v5
+      with:
+        python-version: '3.12'
+
+    - name: Install dependencies
+      run: | 
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Run tests 
+      run: pytest -v
+
+    - name: Build application
+      run: | 
+        echo "Baue Anwendung..."
+        zipn -r build.zip . > /dev/null
+
+
+    - name: Deploy (Simulation)
+      run: |
+        echo "Deploye Anwendung..."
+        echo "Deployment erfolgreicht"
